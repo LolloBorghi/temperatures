@@ -1,6 +1,4 @@
 ## this import is about mqtt
-
-from private_keys import EMAIL, TOKEN_KEY
 import time
 import paho.mqtt.client as mqtt
 from datetime import datetime
@@ -15,8 +13,8 @@ from influxdb_client.client.write_api import SYNCHRONOUS
 
 # You can generate an API token from the "API Tokens Tab" in the UI
 bucket = "gruppo1"
-org = EMAIL     #those are private
-token = TOKEN_KEY
+org = "lorenzo.borghi@fermi.mo.it"
+token = "Jqq9VkpO_KWzDp3uFx9cc275Xuids-9i6HbAw_GZJ94BGkD5B9K5rfWZt8wNEIQg_C53iWRrFSrQN6V4Qpc6fQ=="
 # Store the URL of your InfluxDB instance
 url="https://us-east-1-1.aws.cloud2.influxdata.com"
 
@@ -29,8 +27,8 @@ client = influxdb_client.InfluxDBClient(
 
 write_api = client.write_api(write_options=SYNCHRONOUS)
 
-#p = influxdb_client.Point("temperatures").tag("device", "MSP430_5529").tag("group", "1").field("temp", "VALUE HERE!")
-#write_api.write(bucket=bucket, org=org, record=p)
+p = influxdb_client.Point("temperatures").tag("device", "MSP4305529").tag("group", "1").field("temp", "VALUE HERE!")
+write_api.write(bucket=bucket, org=org, record=p)
 
 
 ########################

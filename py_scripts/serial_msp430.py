@@ -1,15 +1,12 @@
-#from curses import baudrate
+from curses import baudrate
 import paho.mqtt.client as mqtt
 from datetime import datetime
 import serial
 
-## MQTT CONFIG
 BROKER = 'mqtt.ssh.edu.it'
 TOPIC_PUBLISHER = '4F/temperature/group1'
 #TOPIC_SUBSCRIBER = 'crono/borghi/command'
-
-## SERIAL CONFIG
-SERIAL_PORT = "COM3"                      #inserire la porta seriale per msp430
+SERIAL_PORT = "/dev/cu.usbmodem2132203"                      #inserire la porta seriale per msp430
 
 
 try:
@@ -19,8 +16,6 @@ try:
 except:
 	print(f"can't reach serial on {SERIAL_PORT}")
 	exit
-
-print(f"serial connected on {SERIAL_PORT}")
 
 def on_connect(client, userdata, flags, rc):
 	print(f'{mqtt.connack_string(rc)}')
@@ -78,8 +73,6 @@ def main():
 			print('\nMQTT client disconnecting...bye')
 	finally:
 		client.disconnect()
-		client.loop_stop()
-		ser.close()
 
 if __name__ == '__main__':
 	main()
