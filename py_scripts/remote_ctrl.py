@@ -1,5 +1,6 @@
 ## this import is about mqtt
 import time
+from keys import API_TOKEN, PRIVATE_ORG
 import paho.mqtt.client as mqtt
 from datetime import datetime
 
@@ -13,8 +14,8 @@ from influxdb_client.client.write_api import SYNCHRONOUS
 
 # You can generate an API token from the "API Tokens Tab" in the UI
 bucket = "gruppo1"
-org = "lorenzo.borghi@fermi.mo.it"
-token = "Jqq9VkpO_KWzDp3uFx9cc275Xuids-9i6HbAw_GZJ94BGkD5B9K5rfWZt8wNEIQg_C53iWRrFSrQN6V4Qpc6fQ=="
+org = PRIVATE_ORG
+token = API_TOKEN
 # Store the URL of your InfluxDB instance
 url="https://us-east-1-1.aws.cloud2.influxdata.com"
 
