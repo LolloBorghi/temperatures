@@ -29,7 +29,7 @@ client = influxdb_client.InfluxDBClient(
 write_api = client.write_api(write_options=SYNCHRONOUS)
 
 
-######################
+#####################
 ## SETUP MQTT
 
 BROKER = 'mqtt.ssh.edu.it'
@@ -49,7 +49,7 @@ def on_message(client, userdata, msg):
     msg_decode = str(msg.payload.decode("utf-8"))
     print(f'[{datetime.now().strftime("%Y-%m-%d %H:%M:%S")}] received: {msg_decode} from topic: {msg.topic}')
     
-    #quando arriva la temperatura, la carichiamo sul server dbms
+    #when the temperature arrives, we load it into the dbms server
     p = influxdb_client.Point("temperatures").tag("device", "MSP430F5529").tag("group", "1").field("temp", msg_decode)
     write_api.write(bucket=bucket, org=org, record=p)
 
@@ -71,7 +71,7 @@ def main():
 
     try:
         while True:
-            pass    #niente da fare qui, solo ascoltare
+            pass    #listening
             
     except KeyboardInterrupt:
         print('\nMQTT client disconnecting...bye')

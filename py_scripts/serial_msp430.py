@@ -6,7 +6,7 @@ import serial
 
 BROKER = 'mqtt.ssh.edu.it'
 TOPIC_PUBLISHER = '4F/temperature/group1'
-SERIAL_PORT = "/dev/cu.usbmodem2132203"                      #inserire la porta seriale per msp430
+SERIAL_PORT = "/dev/cu.usbmodem2132203" 		#serial port for msp430
 
 
 try:
@@ -45,7 +45,7 @@ def main():
 	try:
 		while True:
 			final_msg = ''
-			while ser.inWaiting() > 0:	#se c'è qualcosa da leggere (bytes)
+			while ser.inWaiting() > 0:	#if there's something to read from serial (bytes)
 				final_msg += ser.read().decode("ascii")
 			
 			if final_msg != '':
