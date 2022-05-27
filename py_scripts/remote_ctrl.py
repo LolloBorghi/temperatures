@@ -1,6 +1,6 @@
 ## this import is about mqtt
 import time
-from keys import API_TOKEN, PRIVATE_ORG
+from keys import API_TOKEN, PRIVATE_ORG     #contains private values
 import paho.mqtt.client as mqtt
 from datetime import datetime
 
@@ -28,23 +28,22 @@ client = influxdb_client.InfluxDBClient(
 
 write_api = client.write_api(write_options=SYNCHRONOUS)
 
-p = influxdb_client.Point("temperatures").tag("device", "MSP4305529").tag("group", "1").field("temp", "VALUE HERE!")
-write_api.write(bucket=bucket, org=org, record=p)
-
 
 ########################
 ## SETUP MQTT
 
 BROKER = 'mqtt.ssh.edu.it'
-#TOPIC_PUBLISHER = 'crono/borghi/command'
 TOPIC_SUBSCRIBER = '4F/temperature/group1'
+
 
 def on_connect(client, userdata, flags, rc):
 	print(f'{mqtt.connack_string(rc)}')
 	event_flag = True
 
+
 def on_subscribe(client, userdata, mid, granted_qos):
 	print(f'subscribed {TOPIC_SUBSCRIBER} with QoS: {granted_qos[0]}\n')
+
 
 def on_message(client, userdata, msg):
     msg_decode = str(msg.payload.decode("utf-8"))
@@ -54,14 +53,6 @@ def on_message(client, userdata, msg):
     p = influxdb_client.Point("temperatures").tag("device", "MSP430F5529").tag("group", "1").field("temp", msg_decode)
     write_api.write(bucket=bucket, org=org, record=p)
 
-'''
-def on_publish(client, userdata, mid):
-	print(f'[{datetime.now().strftime("%Y-%m-%d %H:%M:%S")}] msg published with id: {mid}')
-	event_flag = True
-'''
-
-
-
 
 def main():
     client = mqtt.Client()
@@ -70,7 +61,6 @@ def main():
     client.on_connect = on_connect
     client.on_subscribe = on_subscribe
     client.on_message = on_message
-    #client.on_publish = on_publish
 
 	#client --> broker connection
     print('MQTT client connecting...', end = ' ')

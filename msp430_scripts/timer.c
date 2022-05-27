@@ -1,7 +1,12 @@
+/*
+ * timer.c
+ *
+ *  Created on: 20 feb 2022
+ *      Author: group1
+ */
+
 #include <msp430.h>
 unsigned long milliseconds;
-
-
 
 
 void init_timer(void)
@@ -14,6 +19,7 @@ void init_timer(void)
     TA0CTL |= TAIE; //abilita interrupt timer
    __enable_interrupt();
 }
+
 
 unsigned long millis(void)
 {
