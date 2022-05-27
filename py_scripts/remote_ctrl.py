@@ -29,7 +29,7 @@ client = influxdb_client.InfluxDBClient(
 write_api = client.write_api(write_options=SYNCHRONOUS)
 
 
-########################
+######################
 ## SETUP MQTT
 
 BROKER = 'mqtt.ssh.edu.it'

@@ -1,3 +1,10 @@
+/*
+ * script designed for msp430F5529
+ *
+ *  Created on: 20 feb 2022
+ *      Author: group1
+ */
+
 #include <msp430.h>
 #include <timer.h>
 #include <stdio.h>

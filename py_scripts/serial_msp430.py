@@ -45,7 +45,7 @@ def main():
 	try:
 		while True:
 			final_msg = ''
-			while ser.inWaiting() > 0:	#se c'è qualcosa da leggere
+			while ser.inWaiting() > 0:	#se c'è qualcosa da leggere (bytes)
 				final_msg += ser.read().decode("ascii")
 			
 			if final_msg != '':
